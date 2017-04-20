@@ -4,27 +4,35 @@ from records.models import Post
 
 from django.shortcuts import render
 from django.urls import reverse_lazy
-
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView
 from django.views.generic.edit import DeleteView
+from django.views.generic.edit import UpdateView
 
 class PostListView(ListView):
 
-    model = Post
+	model = Post
 
 class PostDetailView(DetailView):
 
-    model = Post
+	model = Post
 
 class CreatePostView(CreateView):
 
-    model = Post
-    fields = ['title', 'slug', 'content', 'image']
+	model = Post
+	fields = ['title', 'slug', 'content', 'image']
+
+class UpdatePostView(UpdateView):
+
+	model = Post
+	fields = ['title', 'slug', 'content', 'image']
+	template_name_suffix = '_update_form'
 
 class DeletePostView(DeleteView):
-    model = Post
-    success_url = reverse_lazy('list_posts')
+
+	model = Post
+	success_url = reverse_lazy('records:list_posts')
+	
 
 # Create your views here.
